@@ -5,6 +5,8 @@ export async function GET(request: Request) {
 
     await prisma.todo.deleteMany()
 
+    
+
     await prisma.todo.createMany({
         data: [
             {description: 'Piedra del alma ', complete: true},
