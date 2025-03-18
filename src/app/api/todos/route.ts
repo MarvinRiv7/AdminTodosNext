@@ -49,8 +49,6 @@ export async function DELETE(request: Request) {
 
   try {
 
-    
-
     await prisma.todo.deleteMany({where: {complete: true}})
 
     return NextResponse.json('Borrados')

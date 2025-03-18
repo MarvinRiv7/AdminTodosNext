@@ -4,6 +4,8 @@ import React from "react";
 import { CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 import { IoCalendar, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
+import { LiaCookieSolid } from "react-icons/lia";
+import { LuShoppingBasket } from "react-icons/lu";
 
 const MenuItems = [
   {
@@ -21,7 +23,19 @@ const MenuItems = [
     title: 'Server Actions',
     path: '/dashboard/server-todos'
   },
+  {
+    icon: <LiaCookieSolid />,
+    title: 'Cookies',
+    path: '/dashboard/cookies'
+  },
+  {
+    icon: <LuShoppingBasket />,
+    title: 'Productos',
+    path: '/dashboard/products'
+  },
 ]
+ 
+
 
 export const Sidebar = () => {
   return (

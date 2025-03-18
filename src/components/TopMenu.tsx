@@ -1,6 +1,27 @@
-import { CiMenuBurger, CiSearch, CiChat1, CiBellOn } from "react-icons/ci";
+import { Cookie } from "next/font/google";
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { CiMenuBurger, CiSearch, CiChat1, CiBellOn, CiShoppingBasket } from "react-icons/ci";
+import { FaShoppingCart } from "react-icons/fa";
 
-export const TopMenu = () => {
+
+const getTotalCount = (cart: {[id: string]: number}):number => {
+  let items = 0
+  Object.values(cart).forEach((value) => {
+    items += value as number
+  })
+
+  return items
+}
+
+export const TopMenu = async () => {
+
+  const cookiesStore = await cookies()
+  const cart = JSON.parse(cookiesStore.get('cart')?.value ?? '{}')
+
+  const totalitems = getTotalCount(cart)
+
+
   return (
     <div className="sticky z-10 top-0 h-16 bg-gray-200 lg:py-2.5">
       <div className="px-6 flex items-center justify-between space-x-4">
@@ -43,9 +64,13 @@ export const TopMenu = () => {
           </button>
 
           {/* Botón de notificaciones */}
-          <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-            <CiBellOn size={20} />
-          </button>
+          <Link href={'/dashboard/cart'}  className="p-2 flex items-center justify-center h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+            {
+              (totalitems > 0) && ( <span className="text-sm mr-0.5 text-blue-600 font-bold">{totalitems}</span>)
+            }
+           
+            <FaShoppingCart size={30} />
+          </Link>
         </div>
       </div>
     </div>
