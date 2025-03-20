@@ -1,7 +1,9 @@
+import { getUserServerSession } from "@/app/auth/actions/auth-actions";
 import { WidgetItem } from "@/components";
 import { Product, products } from "@/products/data/products";
 import { ItemCard } from "@/shopping-cart";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata = {
  title: 'Carrito de compras',
@@ -28,6 +30,10 @@ const getProductsInCart = (cart: {[id:string]: number}): ProductInCart[] => {
 
 
 export default async function CartPage() {
+
+   const user = await getUserServerSession()
+  
+    if(!user) redirect('/api/auth/signin');
 
     const cookiesStore = await cookies()
     const cart = JSON.parse(cookiesStore.get('cart')?.value ?? '{}') as {[id:string]: number}

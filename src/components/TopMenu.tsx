@@ -1,8 +1,9 @@
 import { Cookie } from "next/font/google";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { CiMenuBurger, CiSearch, CiChat1, CiBellOn, CiShoppingBasket } from "react-icons/ci";
+import { CiMenuBurger, CiSearch, CiChat1, CiBellOn, CiShoppingBasket, CiLogout } from "react-icons/ci";
 import { FaShoppingCart } from "react-icons/fa";
+import { LogoutButton } from "./LogoutButton";
 
 
 const getTotalCount = (cart: {[id: string]: number}):number => {
@@ -57,12 +58,6 @@ export const TopMenu = async () => {
           <button className="flex items-center justify-center w-12 h-12 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
             <CiSearch size={20} />
           </button>
-
-          {/* Botón de chat */}
-          <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-            <CiChat1 size={20} />
-          </button>
-
           {/* Botón de notificaciones */}
           <Link href={'/dashboard/cart'}  className="p-2 flex items-center justify-center h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
             {
@@ -71,6 +66,7 @@ export const TopMenu = async () => {
            
             <FaShoppingCart size={30} />
           </Link>
+          <LogoutButton/>
         </div>
       </div>
     </div>
